@@ -22,13 +22,7 @@ prep_disaggregated <- function() {
     summarise(total_defendants=sum(DEFENDANT.COUNT)) %>%
     mutate(
       # There are 4 "plea of guilty..." dispositions - group all of these in the `pled_guilty` column
-      pled_guilty = grepl('^Plea', DISPOSITION),
-      # "Nolle Prosecution" - decided not to prosecute at this time. Note this is different from a straight
-      # dismissal.
-      # "Finding of no probable cause" - there are a lot of these, I suspect because narcotics cases don't need
-      # to go through the same initiation process as other cases. From the report itself:
-      # "Cases may also be indicted by a grand jury or, in narcotics cases, filed directly by law enforcement."
-      nol_pros_or_no_prob_cause = DISPOSITION %in% c('Nolle Prosecution', 'FNPC')
+      pled_guilty = grepl('^Plea', DISPOSITION)
     )
   
   return(df)
